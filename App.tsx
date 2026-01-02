@@ -101,13 +101,36 @@ const App: React.FC = () => {
   };
 
   const HelpWidget = () => (
-    <div className="help-card p-10 rounded-[3rem] shadow-sm border border-red-100 space-y-8 max-w-sm mx-auto text-center">
-      <h3 className="text-2xl serif font-bold text-red-600">Pomóż Antosi</h3>
-      <div className="bg-white p-6 rounded-3xl border border-red-50 space-y-4 shadow-inner">
-        <div><p className="text-[10px] uppercase tracking-widest font-bold text-gray-300 mb-1">KRS dla 1.5%:</p><p className="text-3xl font-mono font-bold text-gray-800 tracking-tighter">{KRS_NUMBER}</p></div>
-        <div><p className="text-[10px] uppercase tracking-widest font-bold text-gray-300 mb-1">Cel szczegółowy:</p><p className="text-sm font-bold text-gray-700">{SPECIFIC_PURPOSE}</p></div>
+    <div className="help-card p-8 md:p-14 rounded-[4rem] shadow-sm border border-red-100 max-w-4xl mx-auto">
+      <div className="flex flex-col lg:flex-row items-center gap-12 text-center lg:text-left">
+        <div className="flex-grow space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-widest rounded-full mb-2">
+            Zmień świat Antosi
+          </div>
+          <h3 className="text-3xl md:text-5xl serif font-bold text-red-600 leading-tight">Podaruj Antosi <span className="italic">sprawność</span></h3>
+          <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed max-w-xl">
+            Każdy przekazany 1.5% podatku lub darowizna to realna pomoc w opłaceniu kolejnych operacji i tysięcy godzin rehabilitacji.
+          </p>
+        </div>
+        <div className="w-full lg:w-96 shrink-0 space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm p-8 rounded-[2.5rem] border border-red-50 space-y-6 shadow-inner text-center">
+            <div>
+              <p className="text-[10px] uppercase tracking-widest font-bold text-gray-300 mb-2">KRS dla 1.5%:</p>
+              <p className="text-4xl font-mono font-bold text-gray-800 tracking-tighter">{KRS_NUMBER}</p>
+            </div>
+            <div className="pt-4 border-t border-red-50/50">
+              <p className="text-[10px] uppercase tracking-widest font-bold text-gray-300 mb-2">Cel szczegółowy:</p>
+              <p className="text-sm font-bold text-gray-700">{SPECIFIC_PURPOSE}</p>
+            </div>
+          </div>
+          <button 
+            onClick={handleDonationClick} 
+            className="block w-full text-center btn-donate text-white py-6 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl transition-all"
+          >
+            Wpłać teraz online
+          </button>
+        </div>
       </div>
-      <button onClick={handleDonationClick} className="block w-full text-center btn-donate text-white py-5 rounded-full text-sm font-bold uppercase tracking-widest shadow-lg transition-all">Szybka Wpłata</button>
     </div>
   );
 
@@ -137,7 +160,7 @@ const App: React.FC = () => {
               <div className="flex justify-between items-end mb-12"><h2 className="text-4xl serif">Co u nas słychać?</h2><button onClick={() => {setCurrentPage(1); setCurrentView('journal');}} className="text-sm font-bold text-red-500 border-b-2 border-red-500 pb-1">Wszystkie wpisy</button></div>
               <PostGrid posts={posts.slice(0, 3)} onPostClick={navigateToPost} />
             </section>
-            <section className="max-w-4xl mx-auto px-4"><HelpWidget /></section>
+            <section className="max-w-7xl mx-auto px-4"><HelpWidget /></section>
           </div>
         );
       case 'history':
@@ -217,20 +240,20 @@ const App: React.FC = () => {
               ))}
             </div>
 
-            <div className="bg-gray-900 p-12 md:p-24 rounded-[4rem] text-center text-white space-y-8 shadow-2xl">
+            <div className="bg-[#FAF7F2] p-12 md:p-24 rounded-[4rem] text-center text-gray-900 space-y-8 shadow-sm border border-orange-50/50">
                <h3 className="text-4xl md:text-6xl serif italic">Dołącz do nas!</h3>
-               <p className="text-gray-400 text-lg max-w-xl mx-auto font-light">Codziennie udowadniamy, że mimo trudności można żyć pełnią życia. Śledź nasze postępy na Instagramie.</p>
+               <p className="text-gray-600 text-lg max-w-xl mx-auto font-light">Codziennie udowadniamy, że mimo trudności można żyć pełnią życia. Śledź nasze postępy na Instagramie.</p>
                <a 
                 href="https://instagram.com/antosia_wieczorek" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="inline-flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:scale-105 transition-all"
+                className="inline-flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:scale-105 transition-all"
                >
                  <span>Profil na Instagramie</span>
                </a>
             </div>
             
-            <div className="max-w-xl mx-auto"><HelpWidget /></div>
+            <div className="max-w-7xl mx-auto"><HelpWidget /></div>
           </div>
         );
       case 'support':
@@ -242,31 +265,31 @@ const App: React.FC = () => {
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between">
+              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between items-center text-center">
                 <div>
-                  <div className="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center text-3xl mb-8">♥</div>
+                  <div className="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center text-3xl mb-8 mx-auto">♥</div>
                   <h3 className="text-3xl serif font-bold mb-4">Przekaż 1.5% Podatku</h3>
                   <p className="text-gray-500 leading-relaxed text-lg">W swoim rocznym rozliczeniu PIT wpisz numer KRS oraz cel szczegółowy. To nic Cię nie kosztuje, a dla nas jest ogromnym wsparciem.</p>
                 </div>
-                <div className="bg-gray-50 p-8 rounded-[2.5rem] space-y-4">
+                <div className="bg-gray-50 p-8 rounded-[2.5rem] space-y-4 w-full">
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Numer KRS:</p>
-                    <p className="text-3xl font-mono font-bold text-gray-900">{KRS_NUMBER}</p>
+                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1 text-center">Numer KRS:</p>
+                    <p className="text-3xl font-mono font-bold text-gray-900 text-center">{KRS_NUMBER}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Cel szczegółowy:</p>
-                    <p className="text-lg font-bold text-gray-700">{SPECIFIC_PURPOSE}</p>
+                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1 text-center">Cel szczegółowy:</p>
+                    <p className="text-lg font-bold text-gray-700 text-center">{SPECIFIC_PURPOSE}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between">
+              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between items-center text-center">
                 <div>
-                  <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-3xl flex items-center justify-center text-3xl mb-8">💳</div>
+                  <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-3xl flex items-center justify-center text-3xl mb-8 mx-auto">💳</div>
                   <h3 className="text-3xl serif font-bold mb-4">Wpłata Darowizny</h3>
                   <p className="text-gray-500 leading-relaxed text-lg">Możesz wesprzeć nas w każdej chwili za pomocą szybkich płatności online bezpośrednio na subkonto fundacji.</p>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-6 w-full">
                   <button 
                     onClick={handleDonationClick}
                     className="w-full py-6 bg-gray-900 text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-red-500 transition-all shadow-xl"

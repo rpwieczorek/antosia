@@ -1,6 +1,48 @@
-import { Post } from './types';
+import { Post } from '@/types';
 
 export const MOCK_POSTS: Post[] = [
+  {
+    "id": "1767348740787",
+    "slug": "super-moce",
+    "title": "Super moce!",
+    "excerpt": "Historia o błędnej diagnozie łamliwości kości u Antosi oraz inspiracji czerpanej z historii Aimee Mullins i Oscara Pistoriusa w poszukiwaniu siły w niepełnosprawności.",
+    "content": "Pierwszą diagnozą, jaką usłyszeliśmy w Klinice Intensywnej Terapii i Patologii Noworodka w Zabrzu, była łamliwość kości – osteogenesis imperfecta. Nigdy nie zapomnę tej nazwy. Nie będę oszukiwał, byliśmy tą wiadomością bardzo podłamani. Tym bardziej, że lekarze nie pozwalali nam nawet kąpać Antosi samodzielnie, a na jej wózeczku od chwili przyjęcia wisiała karteczka z adnotacją „ostrożna pielęgnacja”. To dodatkowo utwierdzało nas w przekonaniu, że diagnoza ta naprawdę jest bardzo realistyczna i jest to tylko kwestia czasu, aby ją potwierdzić. To był trudny czas dla nas, jeden z najlepszych okresów w moim życiu, ponieważ urodziła nam się przepiękna, cudowna córeczka. Czekaliśmy 9 miesięcy na ten wyjątkowy moment. Jeden z najlepszych, ale zarazem pełen obaw, co przyniesie przyszłość, jak będzięmy mogli pomóc naszej Antosi.\n\nNa szczęście, ta diagnoza została ostatecznie odrzucona chyba w 5 dniu życia Antosi. To była niesamowita ulga. Chciałem podzielić się tym małym szczęściem z całym światem naraz, ale zadzwoniłem po prostu do jednego z naszych przyjaciół, Pawła. Nie zdążyłem nawet dokończyć zdania, bo Paweł przerwał mi je wykrzykując z niesamowitą euforią w głosie coś w stylu: „Jest! Wiedziałem! Mówię Ci, jeszcze się okaże, że ona ma jakieś super moce!”\n\nPiszę o tym, bo był to jeden z przełomowych momentów dla mnie i dla mojego sposobu postrzegania naszej sytuacji. Wtedy też dowiedziałem się o istnieniu bardzo inspirującej kobiety, Aimee Mullins, oraz przypomniałem sobie historię Oscara Pistoriusa. Oboje urodzili się z tą samą wadą co Antosia, obustronną hemimelią strzałkową. Dzięki ich postawie wiem, że niepełnosprawność nie musi oznaczać kalectwa i ułomności. Paradoksalnie można czerpać bardzo dużo siły z własnych słabości. Tego chciałbym się nauczyć. Podejrzewam, że nauczę się tego dopiero od naszej córeczki.\n\nPoniżej zamieszczam dwa wystąpienia Aimee. Wiem, że trwają ponad pół godziny, ale czasem więcej czasu marnujemy przed telewizorem. Naprawdę polecam. Po kliknięciu „play”, można wybrać polskie napisy.",
+    "date": "2012-07-04",
+    "category": "Rehabilitacja",
+    "image": "https://antoninawieczorek.pl/wp-content/gallery/zdjecia-we-wpisach/pistorius.jpg",
+    "seo": {
+      "metaTitle": "Super moce! | Antosia Wieczorek",
+      "metaDescription": "Historia o błędnej diagnozie łamliwości kości u Antosi oraz inspiracji czerpanej z historii Aimee Mullins i Oscara Pistoriusa w poszukiwaniu siły w niepełnosprawności."
+    }
+  },
+  {
+    "id": "1767351074806",
+    "slug": "spotkanie-z-doktorem-paleyem",
+    "title": "Spotkanie z doktorem Paley’em",
+    "excerpt": "Informacja o planowanym spotkaniu z doktorem Paley'em, światowej sławy amerykańskim specjalistą od leczenia hemimelii strzałkowej oraz piszczelowej.",
+    "content": "Wczoraj otrzymalismy odpowiedź odnośnie spotkania z doktorem Paley’em ze Stanów Zjednoczonych. Jesteśmy na etapie ustalania szczegółów. Wizyta odbędzie się w Niemczech lub we Francji między 20 września, a 1 października. Wiążemy wiele nadziei z tą wizytą. Doktor specjalizuje się w leczeniu hemimelii strzałkowej oraz piszczelowej.",
+    "date": "2012-08-26",
+    "category": "Rehabilitacja",
+    "image": "",
+    "seo": {
+      "metaTitle": "Spotkanie z doktorem Paley’em | Antosia Wieczorek",
+      "metaDescription": "Informacja o planowanym spotkaniu z doktorem Paley'em, światowej sławy amerykańskim specjalistą od leczenia hemimelii strzałkowej oraz piszczelowej."
+    }
+  },
+  {
+    "id": "1767351001536",
+    "slug": "otwock-podejscie-trzecie",
+    "title": "Otwock – podejście trzecie.",
+    "excerpt": "Relacja z wyprawy do Otwocka, pierwszego lotu samolotem Antosi oraz problemów z odleżyną pod gipsem i postępów w korekcji stóp.",
+    "content": "Sielanka nigdy nie może trwać za długo i zaczęły się pierwsze problemy… Na prawej nóżce Antosi (tej odrobinę gorszej) zrobiła się odleżyna pod gipsem. Po szybkiej nocnej wyprawie na izbę przyjęć w Koszalinie dowiedzieliśmy się, że raczej nie powinniśmy zakładać ponownie szyny. To był dla nas kolejny cios, bo już wtedy wiedzieliśmy, że czeka nas następna wyprawa do Otwocka…\n\nPostanowiliśmy, że Antosia pojedzie na tę wycieczkę z tatą. Ku naszemu zdziwieniu okazało się, że najszybszym i zarazem najtańszym środkiem transportu z zachodniego wybrzeża do Warszawy jest samolot. I tak właśnie Antosia pierwszy raz znalazła się w przestworzach, ja zresztą też. Poniżej publikuję nasze wspólne zdjęcie.\n\nWyjechaliśmy dosyć wcześnie, bo o 5.30. Mieliśmy przed sobą ok. 1,5h drogi samochodem. Potem godzina lotu, następnie 2 pociągi i półgodzinny spacer. W drodze powrotnej to samo… Antosia loty zniosła bardzo ładnie. Właściwie w ogóle nie płakała, ani podczas wznoszenia, ani podczas lądowania, zuch dziewczyna. Dla niej cala ta wyprawa to po prostu bardzo długi spacer z tatą. Dla mnie w zasadzie też, ale „mega” meczący. Byłoby zdecydowanie prościej, gdyby w naszej stolicy było mniej przeszkód dla wózków. Jest to temat na osobny post, także nie ma się co wgłębiać teraz. Zastanawiam się tylko jak po tym mieście poruszają się niepełnosprawni na wózkach?\n\nOdnośnie samej wizyty:\nDo momentu wygojenia się odleżyny odkładamy na bok szynę. Niestety kosztem korekcji pozycji stopy. Ale ważniejsza jest pięta, więc pokornie wykonujemy zalecenia lekarzy. Może to trwać nawet ponad miesiąc, także nawet nie robiliśmy nowych opatrunków.\nLewa stopa koryguje się bardzo dobrze i to jest pocieszająca informacja.\n\nP.S. Rola taty chyba nie jest zbyt doceniana w naszym społeczeństwie. Co najmniej 5 osób, które spotkałem na swojej drodze tego dnia, nie dowierzało, że sobie sam daję radę z takim maleństwem przez tyle godzin w podróży. Niesamowite… Oczywiście wszystkich pozdrawiam i potwierdzam, że z powrotem wylądowaliśmy ok. godziny 20, gdzie czekała już na nas kochająca mama i spokojnie razem pojechaliśmy autem na zasłużony odpoczynek.",
+    "date": "2012-08-20",
+    "category": "Rehabilitacja",
+    "image": "https://antoninawieczorek.pl/wp-content/gallery/zdjecia-we-wpisach/lot_1.jpg",
+    "seo": {
+      "metaTitle": "Otwock – podejście trzecie. | Antosia Wieczorek",
+      "metaDescription": "Relacja z wyprawy do Otwocka, pierwszego lotu samolotem Antosi oraz problemów z odleżyną pod gipsem i postępów w korekcji stóp."
+    }
+  },
   {
     "id": "1767348925178",
     "slug": "przygotowania",
@@ -27,20 +69,6 @@ export const MOCK_POSTS: Post[] = [
     "seo": {
       "metaTitle": "Nadzieja – Otwock 16.07. | Antosia Wieczorek",
       "metaDescription": "Relacja z wizyty w Otwocku dotyczącej ściągnięcia gipsów u Antosi. Niestety, ze względu na złą pozycję stóp, konieczne było ponowne założenie opatrunków. Autorka dzieli się emocjami i nadzieją."
-    }
-  },
-  {
-    "id": "1767348740787",
-    "slug": "super-moce",
-    "title": "Super moce!",
-    "excerpt": "Historia o błędnej diagnozie łamliwości kości u Antosi oraz inspiracji czerpanej z historii Aimee Mullins i Oscara Pistoriusa w poszukiwaniu siły w niepełnosprawności.",
-    "content": "Pierwszą diagnozą, jaką usłyszeliśmy w Klinice Intensywnej Terapii i Patologii Noworodka w Zabrzu, była łamliwość kości – osteogenesis imperfecta. Nigdy nie zapomnę tej nazwy. Nie będę oszukiwał, byliśmy tą wiadomością bardzo podłamani. Tym bardziej, że lekarze nie pozwalali nam nawet kąpać Antosi samodzielnie, a na jej wózeczku od chwili przyjęcia wisiała karteczka z adnotacją „ostrożna pielęgnacja”. To dodatkowo utwierdzało nas w przekonaniu, że diagnoza ta naprawdę jest bardzo realistyczna i jest to tylko kwestia czasu, aby ją potwierdzić. To był trudny czas dla nas, jeden z najlepszych okresów w moim życiu, ponieważ urodziła nam się przepiękna, cudowna córeczka. Czekaliśmy 9 miesięcy na ten wyjątkowy moment. Jeden z najlepszych, ale zarazem pełen obaw, co przyniesie przyszłość, jak będzięmy mogli pomóc naszej Antosi.\n\nNa szczęście, ta diagnoza została ostatecznie odrzucona chyba w 5 dniu życia Antosi. To była niesamowita ulga. Chciałem podzielić się tym małym szczęściem z całym światem naraz, ale zadzwoniłem po prostu do jednego z naszych przyjaciół, Pawła. Nie zdążyłem nawet dokończyć zdania, bo Paweł przerwał mi je wykrzykując z niesamowitą euforią w głosie coś w stylu: „Jest! Wiedziałem! Mówię Ci, jeszcze się okaże, że ona ma jakieś super moce!”\n\nPiszę o tym, bo był to jeden z przełomowych momentów dla mnie i dla mojego sposobu postrzegania naszej sytuacji. Wtedy też dowiedziałem się o istnieniu bardzo inspirującej kobiety, Aimee Mullins, oraz przypomniałem sobie historię Oscara Pistoriusa. Oboje urodzili się z tą samą wadą co Antosia, obustronną hemimelią strzałkową. Dzięki ich postawie wiem, że niepełnosprawność nie musi oznaczać kalectwa i ułomności. Paradoksalnie można czerpać bardzo dużo siły z własnych słabości. Tego chciałbym się nauczyć. Podejrzewam, że nauczę się tego dopiero od naszej córeczki.\n\nPoniżej zamieszczam dwa wystąpienia Aimee. Wiem, że trwają ponad pół godziny, ale czasem więcej czasu marnujemy przed telewizorem. Naprawdę polecam. Po kliknięciu „play”, można wybrać polskie napisy.",
-    "date": "2021-07-04",
-    "category": "Rehabilitacja",
-    "image": "https://antoninawieczorek.pl/wp-content/gallery/zdjecia-we-wpisach/pistorius.jpg",
-    "seo": {
-      "metaTitle": "Super moce! | Antosia Wieczorek",
-      "metaDescription": "Historia o błędnej diagnozie łamliwości kości u Antosi oraz inspiracji czerpanej z historii Aimee Mullins i Oscara Pistoriusa w poszukiwaniu siły w niepełnosprawności."
     }
   },
   {
@@ -84,6 +112,5 @@ export const MOCK_POSTS: Post[] = [
       "metaTitle": "Szpital w Otwocku 26-27.06.2012r. | Antosia Wieczorek",
       "metaDescription": "Relacja z pobytu Antosi w szpitalu w Otwocku w czerwcu 2012 roku, obejmująca badania, przygotowania do operacji oraz przebieg zabiegu gipsowania nóżek."
     }
-  },
-  
+  }
 ];

@@ -2,15 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-// Krytyczny polyfill dla środowisk przeglądarkowych
-if (typeof window !== 'undefined') {
-  (window as any).process = {
-    env: {
-      API_KEY: (window as any).process?.env?.API_KEY || ''
-    }
-  };
-}
-
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
@@ -21,15 +12,15 @@ if (rootElement) {
         <App />
       </React.StrictMode>
     );
-    console.log("Antosia App: Render initiated.");
+    console.log("Aplikacja Antosi: Renderowanie rozpoczęte.");
   } catch (err) {
-    console.error("Antosia App: Render crash", err);
-    rootElement.innerHTML = `<div style="padding: 50px; text-align: center; font-family: sans-serif;">
-      <h2>Wystąpił błąd aplikacji</h2>
-      <p>${err instanceof Error ? err.message : 'Nieznany błąd'}</p>
-      <button onclick="window.location.reload()" style="background: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer;">Odśwież stronę</button>
-    </div>`;
+    console.error("Aplikacja Antosi: Błąd krytyczny", err);
+    rootElement.innerHTML = `
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; text-align:center; padding:20px;">
+        <h2 style="color:#ef4444;">Ups! Coś poszło nie tak.</h2>
+        <p style="color:#666;">Próbujemy uruchomić stronę ponownie...</p>
+        <button onclick="window.location.reload()" style="margin-top:20px; padding:12px 24px; background:#ef4444; color:white; border:none; border-radius:50px; cursor:pointer; font-weight:bold;">Odśwież stronę</button>
+      </div>
+    `;
   }
-} else {
-  console.error("Antosia App: Root element not found!");
 }

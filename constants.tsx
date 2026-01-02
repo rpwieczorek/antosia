@@ -1,4 +1,4 @@
-import { Post } from '@/types';
+import { Post } from './types';
 
 export const MOCK_POSTS: Post[] = [
   {
@@ -48,7 +48,7 @@ export const MOCK_POSTS: Post[] = [
     "slug": "przygotowania",
     "title": "Przygotowania.",
     "excerpt": "Antosia ma ściągnięte gipsy i przygotowuje się do wyjazdu nad morze. Zobacz, jak radzi sobie z nowymi szynami gipsowymi i jakie postępy robi w rozwoju ruchowym.",
-    "content": "Antosia ma ściągnięte gipsy! W szpitalu w Gliwicach lekarze założyli Antosi szyny gipsowe. Będą jej służyć do ok. października. Są dużo lżejsze i córeczka od razu to zauważyła. Z łatwością przewraca się już z brzuszka na plecki. Mamy pozwolenie na ściąganie szyn do pielęgnacji na 15 minut dziennie, także powróciliśmy już do NORMALNYCH kąpieli. Wielka radość dla Antosi!\n\nDzisiaj przygotowujemy się do wyjazdu nad morze. Jedziemy do wujków i cioci, którzy nie widzieli Antosi ponad miesiąc. Nie możemy się wszyscy tego wyjazdu doczekać. Mam nadzieję, że podróż minie szybko i w sobotę będziemy już spacerować plażą przy morzu i wdychać jod.\n\nA z postępów: Antosia trzyma główkę. Obraca się na boczki, bawi się i przyciska grające zabawki, a her ulubioną pozycją jest pozycja pół siedząca.\n\nPozdrowienia dla Wszystkich, którzy trzymają za nas kciuki!",
+    "content": "Antosia ma ściągnięte gipsy! W szpitalu w Gliwicach lekarze założyli Antosi szyny gipsowe. Będą jej służyć do ok. października. Są dużo lżejsze i córeczka od razu to zauważyła. Z łatwością przewraca się już z brzuszka na plecki. Mamy pozwolenie na ściąganie szyn do pielęgnacji na 15 minut dziennie, także powróciliśmy już do NORMALNYCH kąpieli. Wielka radość dla Antosi!\n\nDzisiaj przygotowujemy się do wyjazdu nad morze. Jedziemy do wujków i cioci, którzy nie widzieli Antosi ponad miesiąc. Nie możemy się wszyscy tego wyjazdu doczekać. Mam nadzieję, że podróż minie szybko i w sobotę będziemy już spacerować plażą przy morzu i wdychać jod.\n\nA z postępów: Antosia trzyma główkę. Obraca się na boczki, bawi się i przyciska grające zabawki, a her ulubioną pozycją jest pozycja pół siedząca.\n\nPozdrowienia dla Wszystkich, którzy trzyma za nas kciuki!",
     "date": "2012-08-02",
     "category": "Rehabilitacja",
     "image": "https://antoninawieczorek.pl/wp-content/gallery/zdjecia-we-wpisach/podrzut.jpg",

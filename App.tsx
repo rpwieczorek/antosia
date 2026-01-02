@@ -412,9 +412,32 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-[#FEFBF9]">
       <Navbar currentView={currentView} setView={(v) => {setCurrentView(v); setCurrentPage(1);}} />
       <main className="flex-grow">{renderContent()}</main>
-      <footer className="bg-white border-t border-gray-100 py-16 px-4 text-center">
-        <h2 className="text-2xl serif font-bold mb-8">Antosia Wieczorek</h2>
-        <button onClick={() => setCurrentView('migration')} className="text-[8px] uppercase tracking-widest text-gray-300">Panel administracyjny</button>
+      <footer className="bg-white border-t border-gray-100 py-20 px-4 text-center">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <div className="space-y-4">
+            <h2 className="text-3xl serif font-bold">Antosia Wieczorek</h2>
+            <div className="h-px bg-red-100 w-12 mx-auto"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+            <div className="space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Mama Antosi - Liliana</p>
+              <a href="mailto:l.krol.wieczorek@gmail.com" className="text-gray-600 hover:text-red-500 transition-colors">l.krol.wieczorek@gmail.com</a>
+            </div>
+            <div className="space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Tata Antosi - Radek</p>
+              <a href="mailto:radek@antoninawieczorek.pl" className="text-gray-600 hover:text-red-500 transition-colors">radek@antoninawieczorek.pl</a>
+            </div>
+            <div className="space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Kontakt telefoniczny</p>
+              <a href="tel:+48500131987" className="text-gray-600 hover:text-red-500 transition-colors font-mono">+48 500 131 987</a>
+            </div>
+          </div>
+
+          <div className="pt-8">
+            <button onClick={() => setCurrentView('migration')} className="text-[8px] uppercase tracking-[0.4em] font-bold text-gray-300 hover:text-gray-900 transition-all">Panel administracyjny</button>
+          </div>
+        </div>
       </footer>
       <CookieConsent />
     </div>

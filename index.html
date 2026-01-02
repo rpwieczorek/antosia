@@ -11,7 +11,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         
-        // Domyślnie blokujemy analitykę przed uzyskaniem zgody
         gtag('consent', 'default', {
             'analytics_storage': 'denied',
             'ad_storage': 'denied',
@@ -24,12 +23,11 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Konfiguracja Tailwind Play CDN
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                         serif: ['Fraunces', 'serif'],
                     },
                     colors: {
@@ -48,14 +46,44 @@
             background-color: #FEFBF9;
             margin: 0;
             padding: 0;
+            color: #374151;
         }
+        
+        /* Przywrócenie brakujących klas stylu */
+        .serif {
+            font-family: 'Fraunces', serif;
+        }
+
+        .help-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+            border: 1px solid #fee2e2;
+            box-shadow: 0 10px 30px -10px rgba(239, 68, 68, 0.1);
+        }
+
+        .btn-donate {
+            background-color: #ef4444;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .btn-donate:hover {
+            background-color: #dc2626;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 20px -5px rgba(239, 68, 68, 0.4);
+        }
+
         @keyframes slideUp {
-            from { transform: translateY(100%); opacity: 0; }
+            from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
         .animate-slide-up {
-            animation: slideUp 0.5s ease-out forwards;
+            animation: slideUp 0.6s ease-out forwards;
         }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -64,11 +92,11 @@
             background: #FEFBF9;
         }
         ::-webkit-scrollbar-thumb {
-            background: #e2e8f0;
+            background: #cbd5e1;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #cbd5e1;
+            background: #94a3b8;
         }
     </style>
 <script type="importmap">
@@ -84,7 +112,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- Zmieniono na ścieżkę relatywną dla lepszej kompatybilności -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>

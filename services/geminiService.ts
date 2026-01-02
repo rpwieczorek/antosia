@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
 export class GeminiService {
@@ -11,16 +10,18 @@ export class GeminiService {
     
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Jesteś zaawansowanym narzędziem do migracji treści z WordPressa. Przekonwertuj poniższy kod HTML na czysty tekst Markdown.
+      contents: `Jesteś ekspertem od migracji treści z WordPress. Przekonwertuj HTML na czysty Markdown.
       
-      ZASADY:
-      1. Wyodrębnij TYTUŁ wpisu.
-      2. Przekonwertuj treść na Markdown, zachowując strukturę akapitów.
-      3. Znajdź wszystkie tagi <img>. Zwróć ich adresy URL w tablicy 'images' w kolejności występowania.
-      4. Pierwsze zdjęcie w treści potraktuj jako główne.
-      5. Przygotuj krótkie SEO Description (ok. 150 znaków) na podstawie treści.
+      ZASADY FORMATOWANIA:
+      1. Tytuł: Wyodrębnij sensowny tytuł.
+      2. Struktura: 
+         - Każdą datę (np. 26.06.2012) zamień na nagłówek: ### 26.06.2012
+         - Rozdzielaj akapity podwójnym znakiem nowej linii.
+         - NIE używaj technicznych znaczników typu \\n, \\r, &nbsp; w tekście wynikowym.
+      3. Zdjęcia: Wyłuskaj wszystkie URL obrazków.
+      4. Opis: Krótkie streszczenie (SEO).
       
-      KOD HTML:
+      KOD DO KONWERSJI:
       ${rawHtml}`,
       config: {
         responseMimeType: "application/json",
@@ -43,7 +44,16 @@ export class GeminiService {
     const text = response.text;
     if (!text) throw new Error("Błąd komunikacji z AI");
     
-    return JSON.parse(text);
+    // Czyścimy tekst z ewentualnych pozostałości po parsowaniu JSON
+    const data = JSON.parse(text);
+    if (data.cleanMarkdown) {
+      data.cleanMarkdown = data.cleanMarkdown
+        .replace(/\\n/g, '\n')
+        .replace(/\\r/g, '')
+        .replace(/&nbsp;/g, ' ');
+    }
+    
+    return data;
   }
 }
 

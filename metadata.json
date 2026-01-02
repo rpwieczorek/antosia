@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Antosia Wieczorek - Oficjalna Strona",
+  "description": "Historia leczenia i rehabilitacji Antosi Wieczorek. Miejsce, gdzie dzielimy się postępami i prosimy o wsparcie w walce o sprawność.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

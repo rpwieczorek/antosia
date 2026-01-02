@@ -16,7 +16,6 @@ const App: React.FC = () => {
     if (savedPosts) {
       try {
         const parsed = JSON.parse(savedPosts);
-        // Łączymy zapisane posty z tymi z constants, unikając duplikatów po ID
         const combined = [...parsed];
         MOCK_POSTS.forEach(mock => {
           if (!combined.find(p => p.id === mock.id)) {
@@ -164,7 +163,22 @@ const App: React.FC = () => {
           <article className="max-w-3xl mx-auto px-4 py-24 animate-in fade-in duration-700">
             <button onClick={() => setCurrentView('journal')} className="mb-12 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 flex items-center group"><span className="group-hover:-translate-x-1 transition-transform mr-3">←</span> Powrót do dziennika</button>
             <div className="flex items-center gap-6 mb-8"><span className="inline-block px-4 py-1.5 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-widest rounded-full">{selectedPost.category}</span><time className="text-[10px] uppercase tracking-[0.2em] text-gray-300 font-bold">{new Date(selectedPost.date).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
-            <h1 className="text-4xl md:text-7xl serif mb-16 leading-[1.1]">{selectedPost.title}</h1>
+            <h1 className="text-4xl md:text-7xl serif mb-12 leading-[1.1]">{selectedPost.title}</h1>
+            
+            {/* Main Thumbnail in Post View */}
+            <div className="mb-16 -mx-4 md:-mx-12">
+              {selectedPost.image ? (
+                <img src={selectedPost.image} alt={selectedPost.title} className="w-full h-auto rounded-[2.5rem] shadow-2xl border border-gray-100" />
+              ) : (
+                <div className="w-full aspect-video bg-gradient-to-br from-gray-50 to-gray-100 rounded-[2.5rem] flex items-center justify-center border border-gray-100 shadow-sm">
+                  <div className="text-center opacity-10">
+                    <div className="text-8xl">♥</div>
+                    <p className="text-xs font-bold uppercase tracking-widest mt-4 italic">Antosia Wieczorek</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="prose-content">{renderFormattedContent(selectedPost.content)}</div>
             <div className="mt-32 pt-20 border-t border-gray-100"><HelpWidget /></div>
           </article>

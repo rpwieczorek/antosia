@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { geminiService } from '../services/geminiService';
 import { Post } from '../types';
@@ -52,8 +51,8 @@ const MigrationTool: React.FC<MigrationToolProps> = ({ onAddPost }) => {
       content: migratedData.cleanMarkdown,
       date: pubDate,
       category: 'Rehabilitacja',
-      // Pierwsze zdjęcie z AI staje się miniaturką
-      image: migratedData.images?.[0] || 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=800',
+      // Jeśli AI nie znalazło zdjęć, ustawiamy null/pusty string, by pokazać estetyczny placeholder
+      image: migratedData.images?.[0] || '',
       seo: {
         metaTitle: `${migratedData.title} | Antosia Wieczorek`,
         metaDescription: migratedData.seoDescription
@@ -141,11 +140,17 @@ const MigrationTool: React.FC<MigrationToolProps> = ({ onAddPost }) => {
             {migratedData && (
               <div className="space-y-8 animate-in fade-in slide-in-from-right-4">
                 <div className="relative aspect-video rounded-3xl overflow-hidden bg-gray-100 border border-gray-100 shadow-md">
-                   <img 
-                    src={migratedData.images?.[0]} 
-                    alt="Miniaturka" 
-                    className="w-full h-full object-cover"
-                   />
+                   {migratedData.images?.[0] ? (
+                     <img 
+                      src={migratedData.images[0]} 
+                      alt="Miniaturka" 
+                      className="w-full h-full object-cover"
+                     />
+                   ) : (
+                     <div className="w-full h-full bg-gray-50 flex items-center justify-center">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300">Brak obrazu głównego</span>
+                     </div>
+                   )}
                    <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[8px] px-3 py-1 rounded-full uppercase font-bold tracking-widest">
                      Ustawione jako okładka
                    </div>

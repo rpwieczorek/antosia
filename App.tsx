@@ -188,19 +188,19 @@ const App: React.FC = () => {
                 { 
                   title: 'Szachy', 
                   desc: 'Skupienie i strategia. Szachy uczą Antosię cierpliwości i tego, że każdy problem ma rozwiązanie – wystarczy je tylko dostrzec.', 
-                  img: 'https://images.unsplash.com/photo-1544161515-436cefd54c37?auto=format&fit=crop&q=80&w=800',
+                  img: 'https://antoninawieczorek.pl/szachy.jpg',
                   color: 'border-red-100'
                 },
                 { 
                   title: 'Pływanie', 
                   desc: 'Woda to żywioł, w którym ograniczenia ruchowe przestają istnieć. To tutaj Antosia buduje siłę mięśni i poczucie wolności.', 
-                  img: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&q=80&w=800',
+                  img: 'https://antoninawieczorek.pl/plywanie.jpg',
                   color: 'border-blue-100'
                 },
                 { 
                   title: 'Narty', 
                   desc: 'Zima to czas szaleństwa na stoku. Jazda na nartach to dla nas dowód, że niemożliwe nie istnieje.', 
-                  img: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=800',
+                  img: 'https://antoninawieczorek.pl/narty.jpg',
                   color: 'border-pink-100'
                 }
               ].map((p, idx) => (

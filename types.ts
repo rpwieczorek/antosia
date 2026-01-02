@@ -1,4 +1,5 @@
 
+
 export interface Post {
   id: string;
   slug: string;
@@ -6,7 +7,8 @@ export interface Post {
   excerpt: string;
   content: string;
   date: string;
-  category: 'Leczenie' | 'Rehabilitacja' | 'Codzienność' | 'Podziękowania';
+  // Dodano kategorię 'Przemyślenia' do unii typów
+  category: 'Leczenie' | 'Rehabilitacja' | 'Codzienność' | 'Podziękowania' | 'Przemyślenia';
   image: string;
   seo?: {
     metaTitle: string;

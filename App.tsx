@@ -6,10 +6,13 @@ import PostGrid from './components/PostGrid';
 import MigrationTool from './components/MigrationTool';
 import CookieConsent from './components/CookieConsent';
 
+const POSTS_PER_PAGE = 6;
+
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>('home');
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [showExportCode, setShowExportCode] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   
   const [posts, setPosts] = useState<Post[]>(() => {
     const savedPosts = localStorage.getItem('antosia_posts');
@@ -22,12 +25,12 @@ const App: React.FC = () => {
             combined.push(mock);
           }
         });
-        return combined;
+        return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       } catch (e) {
         return MOCK_POSTS;
       }
     }
-    return MOCK_POSTS;
+    return MOCK_POSTS.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   });
 
   const DONATION_URL = "https://www.rownymkrokiem.pl/antoninawieczorek/";
@@ -39,8 +42,8 @@ const App: React.FC = () => {
   }, [posts]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentView]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentView, currentPage]);
 
   const handleDonationClick = () => {
     window.open(DONATION_URL, '_blank', 'noopener,noreferrer');
@@ -52,7 +55,8 @@ const App: React.FC = () => {
   };
 
   const handleAddPost = (newPost: Post) => {
-    setPosts(prevPosts => [newPost, ...prevPosts]);
+    setPosts(prevPosts => [newPost, ...prevPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
+    setCurrentPage(1);
     setCurrentView('journal');
   };
 
@@ -90,20 +94,6 @@ const App: React.FC = () => {
             <span className="shrink-0">{block.replace('###', '').trim()}</span>
             <span className="h-px flex-grow bg-red-100"></span>
           </h3>
-        );
-      }
-      const dateRegex = /^(\d{2}\.\d{2}\.\d{4})/;
-      const dateMatch = block.match(dateRegex);
-      if (dateMatch) {
-        return (
-          <React.Fragment key={i}>
-            <h3 className="text-2xl serif text-red-500 mt-16 mb-8 font-bold flex items-center gap-6">
-              <span className="h-px flex-grow bg-red-100"></span>
-              <span className="shrink-0">{dateMatch[1]}</span>
-              <span className="h-px flex-grow bg-red-100"></span>
-            </h3>
-            <p className="mb-8 text-gray-700 leading-relaxed font-light text-xl">{block.replace(dateRegex, '').trim()}</p>
-          </React.Fragment>
         );
       }
       return <p key={i} className="mb-8 text-gray-700 leading-relaxed font-light text-xl">{block}</p>;
@@ -144,17 +134,196 @@ const App: React.FC = () => {
               </div>
             </section>
             <section className="max-w-7xl mx-auto px-4">
-              <div className="flex justify-between items-end mb-12"><h2 className="text-4xl serif">Co u nas słychać?</h2><button onClick={() => setCurrentView('journal')} className="text-sm font-bold text-red-500 border-b-2 border-red-500 pb-1">Wszystkie wpisy</button></div>
+              <div className="flex justify-between items-end mb-12"><h2 className="text-4xl serif">Co u nas słychać?</h2><button onClick={() => {setCurrentPage(1); setCurrentView('journal');}} className="text-sm font-bold text-red-500 border-b-2 border-red-500 pb-1">Wszystkie wpisy</button></div>
               <PostGrid posts={posts.slice(0, 3)} onPostClick={navigateToPost} />
             </section>
             <section className="max-w-4xl mx-auto px-4"><HelpWidget /></section>
           </div>
         );
+      case 'history':
+        return (
+          <div className="max-w-4xl mx-auto px-4 py-24 animate-in fade-in duration-700">
+            <header className="text-center mb-16 space-y-6">
+              <h1 className="text-5xl md:text-7xl serif leading-tight">Moja <span className="italic text-red-500">historia</span></h1>
+              <div className="h-1 bg-red-500 w-24 mx-auto rounded-full"></div>
+            </header>
+            
+            <div className="prose-content space-y-8 text-xl font-light text-gray-700 leading-relaxed">
+              <p>Antosia przyszła na świat 23 marca 2012 roku. Od pierwszych chwil życia musieliśmy mierzyć się z diagnozą, która dla wielu brzmiała jak wyrok – <span className="font-bold text-gray-900">obustronna hemimelia strzałkowa (fibular hemimelia)</span>. Oznaczało to brak kości strzałkowych w obu nóżkach oraz szereg innych wad towarzyszących.</p>
+              
+              <p>W Polsce proponowano nam jedynie amputację obu nóżek i naukę chodzenia na protezach. Nie pogodziliśmy się z tym. Rozpoczęliśmy walkę o sprawność Antosi, która zaprowadziła nas do USA, do kliniki dr. Drora Paleya – wybitnego chirurga, który daje dzieciom takim jak Antosia szansę na własne nogi.</p>
+
+              <div className="my-16 -mx-4 md:-mx-12 lg:-mx-24 overflow-hidden rounded-[3rem] shadow-2xl border-8 border-white relative">
+                 <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=1200" alt="Antosia w dzieciństwie" className="w-full grayscale hover:grayscale-0 transition-all duration-1000" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+              </div>
+
+              <h2 className="text-3xl serif text-red-500 pt-8">Lata walki i tysiące godzin rehabilitacji</h2>
+              <p>Dzięki wsparciu tysięcy ludzi dobrej woli, Antosia przeszła już wiele skomplikowanych operacji rekonstrukcyjnych i wydłużających. Każda z nich wiązała się z bólem, miesiącami w gipsach i aparatach zewnętrznych. Jednak determinacja naszej córki jest silniejsza niż jakiekolwiek przeszkody.</p>
+              
+              <div className="bg-red-50 p-10 rounded-[3rem] border border-red-100 italic text-2xl text-gray-600 font-serif leading-relaxed">
+                "Wiedzieliśmy, że droga będzie długa i kręta, ale każdy krok Antosi na własnych nogach jest dla nas najpiękniejszą nagrodą za ten trud."
+              </div>
+
+              <p>Dziś Antosia jest aktywną, uśmiechniętą dziewczynką. Chodzi do szkoły, bawi się z rówieśnikami i uprawia sporty, o których kiedyś mogliśmy tylko marzyć. Ale to nie koniec drogi. Wraz ze wzrostem, nogi Antosi wymagają kolejnych korekt i nieustannej, kosztownej rehabilitacji, by mogła cieszyć się sprawnością również jako osoba dorosła.</p>
+              
+              <p className="text-gray-900 font-medium">Wasza pomoc pozwala nam opłacać turnusy rehabilitacyjne, wizyty u specjalistów i kolejne etapy leczenia. Dziękujemy, że jesteście z nami!</p>
+            </div>
+
+            <div className="mt-20 pt-20 border-t border-gray-100">
+               <HelpWidget />
+            </div>
+          </div>
+        );
+      case 'passions':
+        return (
+          <div className="max-w-6xl mx-auto px-4 py-24 space-y-24 animate-in fade-in duration-1000">
+            <header className="text-center space-y-6 max-w-3xl mx-auto">
+              <h2 className="text-5xl md:text-7xl serif">Moje <span className="italic text-red-500">pasje</span></h2>
+              <p className="text-xl text-gray-500 font-light leading-relaxed">Rehabilitacja to nasza codzienność, ale to pasje dają Antosi siłę do pokonywania kolejnych barier. Zobacz, co sprawia jej największą radość!</p>
+            </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {[
+                { 
+                  title: 'Szachy', 
+                  desc: 'Skupienie i strategia. Szachy uczą Antosię cierpliwości i tego, że każdy problem ma rozwiązanie – wystarczy je tylko dostrzec.', 
+                  img: 'https://images.unsplash.com/photo-1544161515-436cefd54c37?auto=format&fit=crop&q=80&w=800',
+                  color: 'border-red-100'
+                },
+                { 
+                  title: 'Pływanie', 
+                  desc: 'Woda to żywioł, w którym ograniczenia ruchowe przestają istnieć. To tutaj Antosia buduje siłę mięśni i poczucie wolności.', 
+                  img: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&q=80&w=800',
+                  color: 'border-blue-100'
+                },
+                { 
+                  title: 'Narty', 
+                  desc: 'Zima to czas szaleństwa na stoku. Jazda na nartach to dla nas dowód, że niemożliwe nie istnieje.', 
+                  img: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=800',
+                  color: 'border-pink-100'
+                }
+              ].map((p, idx) => (
+                <div key={idx} className="group flex flex-col items-center text-center space-y-8">
+                  <div className={`relative w-full aspect-[4/5] rounded-[3.5rem] overflow-hidden border-8 ${p.color} shadow-xl group-hover:scale-[1.03] transition-all duration-700`}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  <div className="px-6 space-y-4">
+                    <h3 className="text-3xl serif">{p.title}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gray-900 p-12 md:p-24 rounded-[4rem] text-center text-white space-y-8 shadow-2xl">
+               <h3 className="text-4xl md:text-6xl serif italic">Dołącz do nas!</h3>
+               <p className="text-gray-400 text-lg max-w-xl mx-auto font-light">Codziennie udowadniamy, że mimo trudności można żyć pełnią życia. Śledź nasze postępy na Instagramie.</p>
+               <a 
+                href="https://instagram.com/antosia_wieczorek" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:scale-105 transition-all"
+               >
+                 <span>Profil na Instagramie</span>
+               </a>
+            </div>
+            
+            <div className="max-w-xl mx-auto"><HelpWidget /></div>
+          </div>
+        );
+      case 'support':
+        return (
+          <div className="max-w-5xl mx-auto px-4 py-24 space-y-20 animate-in fade-in duration-700">
+            <header className="text-center space-y-6">
+              <h2 className="text-5xl md:text-7xl serif">Jak możesz <span className="text-red-500 italic">pomóc?</span></h2>
+              <p className="text-xl text-gray-500 font-light">Każda złotówka to cegiełka do sprawności Antosi.</p>
+            </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center text-3xl mb-8">♥</div>
+                  <h3 className="text-3xl serif font-bold mb-4">Przekaż 1.5% Podatku</h3>
+                  <p className="text-gray-500 leading-relaxed text-lg">W swoim rocznym rozliczeniu PIT wpisz numer KRS oraz cel szczegółowy. To nic Cię nie kosztuje, a dla nas jest ogromnym wsparciem.</p>
+                </div>
+                <div className="bg-gray-50 p-8 rounded-[2.5rem] space-y-4">
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Numer KRS:</p>
+                    <p className="text-3xl font-mono font-bold text-gray-900">{KRS_NUMBER}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Cel szczegółowy:</p>
+                    <p className="text-lg font-bold text-gray-700">{SPECIFIC_PURPOSE}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-sm space-y-8 flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-3xl flex items-center justify-center text-3xl mb-8">💳</div>
+                  <h3 className="text-3xl serif font-bold mb-4">Wpłata Darowizny</h3>
+                  <p className="text-gray-500 leading-relaxed text-lg">Możesz wesprzeć nas w każdej chwili za pomocą szybkich płatności online bezpośrednio na subkonto fundacji.</p>
+                </div>
+                <div className="space-y-6">
+                  <button 
+                    onClick={handleDonationClick}
+                    className="w-full py-6 bg-gray-900 text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-red-500 transition-all shadow-xl"
+                  >
+                    Wpłać teraz online
+                  </button>
+                  <p className="text-center text-[10px] text-gray-300 uppercase tracking-widest">Płatności obsługuje Fundacja „Równym Krokiem”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       case 'journal':
+        const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+        const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+        const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
         return (
           <div className="max-w-7xl mx-auto px-4 py-20">
-            <h2 className="text-5xl serif text-center mb-16">Dziennik Antosi</h2>
-            <PostGrid posts={posts} onPostClick={navigateToPost} />
+            <h2 className="text-5xl md:text-7xl serif text-center mb-16">Dziennik <span className="italic text-red-500">Antosi</span></h2>
+            <PostGrid posts={currentPosts} onPostClick={navigateToPost} />
+            
+            {totalPages > 1 && (
+              <div className="mt-20 flex flex-col items-center gap-8">
+                <div className="flex items-center gap-3">
+                  <button 
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-50 hover:text-gray-900 transition-all disabled:opacity-0"
+                  >
+                    ←
+                  </button>
+                  
+                  {[...Array(totalPages)].map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentPage(i + 1)}
+                      className={`w-14 h-14 rounded-full text-[10px] font-bold tracking-widest transition-all ${
+                        currentPage === i + 1 
+                        ? 'bg-gray-900 text-white shadow-lg' 
+                        : 'text-gray-400 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+
+                  <button 
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                    className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-50 hover:text-gray-900 transition-all disabled:opacity-0"
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         );
       case 'post':
@@ -164,21 +333,15 @@ const App: React.FC = () => {
             <button onClick={() => setCurrentView('journal')} className="mb-12 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 flex items-center group"><span className="group-hover:-translate-x-1 transition-transform mr-3">←</span> Powrót do dziennika</button>
             <div className="flex items-center gap-6 mb-8"><span className="inline-block px-4 py-1.5 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-widest rounded-full">{selectedPost.category}</span><time className="text-[10px] uppercase tracking-[0.2em] text-gray-300 font-bold">{new Date(selectedPost.date).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
             <h1 className="text-4xl md:text-7xl serif mb-12 leading-[1.1]">{selectedPost.title}</h1>
-            
-            {/* Main Thumbnail in Post View */}
             <div className="mb-16 -mx-4 md:-mx-12">
               {selectedPost.image ? (
                 <img src={selectedPost.image} alt={selectedPost.title} className="w-full h-auto rounded-[2.5rem] shadow-2xl border border-gray-100" />
               ) : (
                 <div className="w-full aspect-video bg-gradient-to-br from-gray-50 to-gray-100 rounded-[2.5rem] flex items-center justify-center border border-gray-100 shadow-sm">
-                  <div className="text-center opacity-10">
-                    <div className="text-8xl">♥</div>
-                    <p className="text-xs font-bold uppercase tracking-widest mt-4 italic">Antosia Wieczorek</p>
-                  </div>
+                  <div className="text-center opacity-10"><div className="text-8xl">♥</div><p className="text-xs font-bold uppercase tracking-widest mt-4 italic">Antosia Wieczorek</p></div>
                 </div>
               )}
             </div>
-
             <div className="prose-content">{renderFormattedContent(selectedPost.content)}</div>
             <div className="mt-32 pt-20 border-t border-gray-100"><HelpWidget /></div>
           </article>
@@ -193,18 +356,14 @@ const App: React.FC = () => {
                  <button onClick={() => {if(window.confirm("Zresetować wszystko do stanu z kodu?")){localStorage.removeItem('antosia_posts');window.location.reload();}}} className="px-6 py-2 bg-red-50 text-red-400 text-[10px] font-bold uppercase tracking-widest rounded-full">Resetuj pamięć</button>
                </div>
             </header>
-
             {showExportCode && (
               <div className="bg-gray-900 p-8 rounded-[2rem] shadow-2xl">
                 <button onClick={() => {navigator.clipboard.writeText(generateConstantsCode());alert("Skopiowano!");}} className="text-white text-[10px] bg-white/10 px-4 py-2 rounded-lg mb-4">Kopiuj kod</button>
                 <pre className="text-gray-300 text-[10px] font-mono overflow-auto max-h-[400px]">{generateConstantsCode()}</pre>
               </div>
             )}
-
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-12">
-               <div className="xl:col-span-2">
-                 <MigrationTool onAddPost={handleAddPost} />
-               </div>
+               <div className="xl:col-span-2"><MigrationTool onAddPost={handleAddPost} /></div>
                <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
                  <h3 className="text-xl serif mb-6">Zarządzaj wpisami ({posts.length})</h3>
                  <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
@@ -214,50 +373,12 @@ const App: React.FC = () => {
                          <p className="text-xs font-bold truncate">{post.title}</p>
                          <p className="text-[9px] text-gray-400 uppercase tracking-tighter">{post.date}</p>
                        </div>
-                       <button 
-                        onClick={() => handleDeletePost(post.id)}
-                        className="p-2 text-red-300 hover:text-red-500 transition-colors"
-                        title="Usuń"
-                       >
-                         ✕
-                       </button>
+                       <button onClick={() => handleDeletePost(post.id)} className="p-2 text-red-300 hover:text-red-500 transition-colors" title="Usuń">✕</button>
                      </div>
                    ))}
                  </div>
                </div>
             </div>
-          </div>
-        );
-      case 'passions':
-        return (
-          <div className="max-w-6xl mx-auto px-4 py-20 space-y-20">
-            <div className="text-center space-y-6">
-              <h2 className="text-6xl serif">Moje pasje</h2>
-              <p className="text-xl text-gray-500 max-w-2xl mx-auto">Rehabilitacja to nasza codzienność, ale w życiu Antosi jest miejsce na wielkie marzenia i sportowe emocje.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-              {[
-                { title: 'Szachy', desc: 'Skupienie i strategia. Szachy uczą Antosię, że każdy ruch ma znaczenie.', img: 'https://images.unsplash.com/photo-1544161515-436cefd54c37?auto=format&fit=crop&q=80&w=800', color: 'red' },
-                { title: 'Pływanie', desc: 'Woda to wolność. W czerwonym czepku Antosia pokonuje kolejne baseny.', img: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&q=80&w=800', color: 'blue' },
-                { title: 'Narty', desc: 'Radość na stoku! Antosia kocha prędkość i zimowe szaleństwo.', img: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=800', color: 'pink' }
-              ].map((p, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-[3rem] shadow-sm border border-gray-50 text-center space-y-6 group hover:shadow-xl transition-all duration-500">
-                  <div className={`overflow-hidden rounded-[2rem] border-4 border-${p.color}-50 group-hover:scale-[1.02] transition-transform duration-500`}>
-                    <img src={p.img} alt={p.title} className="w-full h-auto object-cover" />
-                  </div>
-                  <div className="space-y-4 px-4">
-                    <h3 className="text-3xl serif">{p.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="text-center pt-12">
-               <a href="https://instagram.com/antosia_wieczorek" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold uppercase tracking-widest shadow-lg hover:scale-105 transition-all">
-                 <span>Śledź nas na Instagramie</span>
-               </a>
-            </div>
-            <div className="max-w-2xl mx-auto pt-20"><HelpWidget /></div>
           </div>
         );
       default: return null;
@@ -266,7 +387,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FEFBF9]">
-      <Navbar currentView={currentView} setView={setCurrentView} />
+      <Navbar currentView={currentView} setView={(v) => {setCurrentView(v); setCurrentPage(1);}} />
       <main className="flex-grow">{renderContent()}</main>
       <footer className="bg-white border-t border-gray-100 py-16 px-4 text-center">
         <h2 className="text-2xl serif font-bold mb-8">Antosia Wieczorek</h2>

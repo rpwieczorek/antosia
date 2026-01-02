@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View } from '../types';
 
@@ -27,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               { id: 'home', label: 'Start' },
               { id: 'history', label: 'Historia' },
               { id: 'journal', label: 'Dziennik' },
-              { id: 'how-to-help', label: 'Jak pomóc?' },
+              { id: 'passions', label: 'Moje pasje' },
             ].map((item) => (
               <button
                 key={item.id}
@@ -40,16 +39,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               </button>
             ))}
             <button 
-              onClick={() => setView('how-to-help')}
-              className="bg-red-500 text-white px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md hover:bg-red-600 transition-colors"
+              onClick={() => setView('support')}
+              className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md transition-colors ${
+                currentView === 'support' ? 'bg-gray-900 text-white' : 'bg-red-500 text-white hover:bg-red-600'
+              }`}
             >
-              Wesprzyj nas
+              Wesprzyj mnie
             </button>
           </div>
-
-          <button onClick={() => setView('migration')} className="text-[8px] text-gray-200 uppercase tracking-tighter hover:text-gray-400 transition-colors">
-            Admin/Migracja
-          </button>
         </div>
       </div>
     </nav>

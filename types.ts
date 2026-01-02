@@ -14,4 +14,4 @@ export interface Post {
   };
 }
 
-export type View = 'home' | 'history' | 'journal' | 'post' | 'how-to-help' | 'migration';
+export type View = 'home' | 'history' | 'journal' | 'post' | 'passions' | 'migration' | 'support';

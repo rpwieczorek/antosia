@@ -11,15 +11,16 @@ export class GeminiService {
     
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Jesteś narzędziem do czyszczenia kodu HTML. Przekonwertuj poniższy kod z WordPressa na czysty tekst Markdown.
+      contents: `Jesteś zaawansowanym narzędziem do migracji treści z WordPressa. Przekonwertuj poniższy kod HTML na czysty tekst Markdown.
       
-      ZASADY BEZWZGLĘDNE:
-      1. NIE ZMIENIAJ TREŚCI. Nie poprawiaj błędów, nie skracaj, nie redaguj. Tekst musi być identyczny 1:1.
-      2. Wyciągnij Tytuł, Sugerowany Slug (końcówka adresu) oraz czystą treść.
-      3. Znajdź linki do obrazków (tagi <img>) i umieść je w tablicy images.
-      4. POSZUKAJ DATY PUBLIKACJI (np. w tagach <time>, meta property="article:published_time" lub klasach CSS "entry-date"). Zwróć ją w formacie YYYY-MM-DD. Jeśli nie znajdziesz, zostaw puste.
+      ZASADY:
+      1. Wyodrębnij TYTUŁ wpisu.
+      2. Przekonwertuj treść na Markdown, zachowując strukturę akapitów.
+      3. Znajdź wszystkie tagi <img>. Zwróć ich adresy URL w tablicy 'images' w kolejności występowania.
+      4. Pierwsze zdjęcie w treści potraktuj jako główne.
+      5. Przygotuj krótkie SEO Description (ok. 150 znaków) na podstawie treści.
       
-      KOD HTML DO PRZETWORZENIA:
+      KOD HTML:
       ${rawHtml}`,
       config: {
         responseMimeType: "application/json",
@@ -27,18 +28,14 @@ export class GeminiService {
           type: Type.OBJECT,
           properties: {
             title: { type: Type.STRING },
-            slug: { type: Type.STRING },
             cleanMarkdown: { type: Type.STRING },
-            excerpt: { type: Type.STRING },
-            seoTitle: { type: Type.STRING },
             seoDescription: { type: Type.STRING },
-            date: { type: Type.STRING, description: "Format YYYY-MM-DD" },
             images: { 
               type: Type.ARRAY,
               items: { type: Type.STRING }
             }
           },
-          required: ["title", "slug", "cleanMarkdown", "seoTitle"]
+          required: ["title", "cleanMarkdown", "seoDescription", "images"]
         }
       }
     });
